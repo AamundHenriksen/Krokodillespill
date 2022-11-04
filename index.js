@@ -1,76 +1,74 @@
+//model
 const container = document.getElementById("container")
-let randomNumber1 = ""
-let randomNumber2 = ""
+let randomNumOne = Math.floor(Math.random() * 10) + 1
+let randomNumTwo = Math.floor(Math.random() * 10) + 1
 let points = 0
 let message = `Bruk >, < eller = for å løse oppgaven og få riktig svar!`
 
-console.log(message)
+//view
+console.log(message) // Melding i console.log
 
-renderView()
+renderView() // Oppdaterer viewet
 
-function htmlPage() {
+function renderView() {
 
     container.innerHTML = `
     <p>Poeng: ${points}</p>
     <img src="images/crocodile.png">
-    <p>${randomNumber1}</p>
+    <p>${randomNumOne}</p>
     <input type="text" id="inputbox" maxlength=1>
-    <p>${randomNumber2}</p>
+    <p>${randomNumTwo}</p>
     <button onclick="checkValue()">Submit</button>
     <button onclick="generateRandomNumber()">Reset</button>
     <p>${message}</p>
     `
 }
 
-function renderView() {
-    generateRandomNumber()
-    htmlPage()
-}
-
+//controller
 function checkValue() {
-    let inputBox = document.getElementById("inputbox").value
+    let inputBox = document.getElementById("inputbox").value // Henter verdien til det som står i tekstboksen
 
-    if (randomNumber1 > randomNumber2 && inputBox === ">") {
+    if (randomNumOne > randomNumTwo && inputBox === ">") { // Sjekker verdiene og utfører HVIS true
 
-        points++
-        message = `Du gjettet riktig svar og fikk ett poeng!`
-        console.log(message)
-        generateRandomNumber()
+        points++ // points øker med 1
+        message = `Du gjettet riktig svar og fikk ett poeng!` // Melding på skjermen
+        console.log(message) // Melding i console.log
+        generateRandomNumber() // Oppdaterer variablene's tall mellom 1-10 og oppdaterer viewet
 
-    } else if (randomNumber1 < randomNumber2 && inputBox === "<") {
+    } else if (randomNumOne < randomNumTwo && inputBox === "<") { 
 
-        points++
-        message = `Du gjettet riktig svar og fikk ett poeng!`
-        console.log(message)
-        generateRandomNumber()
+        points++ 
+        message = `Du gjettet riktig svar og fikk ett poeng!` 
+        console.log(message) 
+        generateRandomNumber() 
 
-    } else if (randomNumber1 === randomNumber2 && inputBox === "=") {
+    } else if (randomNumOne === randomNumTwo && inputBox === "=") { 
 
-        points++
-        message = `Du gjettet riktig svar og fikk ett poeng!`
-        console.log(message)
-        generateRandomNumber()
+        points++ 
+        message = `Du gjettet riktig svar og fikk ett poeng!` 
+        console.log(message) 
+        generateRandomNumber() 
         
-    } else if (inputBox === "") {
+    } else if (inputBox === "") { // Sjekker om verdien er blank og utfører HVIS true
 
         message = `Har du husket å skrive inn >, < eller = ?`
-        console.log(message)
-        htmlPage()
+        console.log(message) 
+        renderView() // Oppdaterer viewet
 
-    } else {
+    } else { // Utføres dersom ingen av de over var true
 
-        points--
-        message = `Du gjettet feil svar og mistet ett poeng! Prøv igjen!`
-        console.log(message)
-        generateRandomNumber()
+        points-- // points reduseres med 1
+        message = `Du gjettet feil svar og mistet ett poeng! Prøv igjen!` 
+        console.log(message) 
+        generateRandomNumber() 
     }
 }
 
 function generateRandomNumber() {
-    randomNumber1 = Math.floor(Math.random() * 10) + 1
-    randomNumber2 = Math.floor(Math.random() * 10) + 1
+    randomNumOne = Math.floor(Math.random() * 10) + 1 // Gir variabelen et nytt tilfeldig tall mellom 1-10
+    randomNumTwo = Math.floor(Math.random() * 10) + 1 
 
-    console.log(randomNumber1, randomNumber2)
+    console.log(randomNumOne, randomNumTwo) // Viser tallene som variablene fikk i console.log
 
-    htmlPage()
+    renderView() // Oppdaterer viewet
 }
